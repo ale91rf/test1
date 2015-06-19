@@ -9,5 +9,20 @@
         android:id="@+id/company_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <ProgressBar
+        android:id="@+id/pg_Bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+    <Button
+        android:id="@+id/btn_try"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/volver_a_intentar"
+        android:visibility="gone"/>
 
 </RelativeLayout>

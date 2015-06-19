@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Test</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Companies list</string>
+    <string name="volver_a_intentar">Volver a intentar</string>
+    <string name="cannot">No se ha podido establecer la conexion con internet</string>
+    <string name="error_download">Ha habido un error mientras se cargaban las companias</string>
 </resources>
