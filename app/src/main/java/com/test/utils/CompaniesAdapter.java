@@ -8,14 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.omitsis.test.R;
 import com.test.model.Company;
-import com.test.volley.App;
-import com.test.volley.BitmapMemCache;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,26 +63,18 @@ public class CompaniesAdapter extends ArrayAdapter<Company> {
         holder.lblAddress.setText(company.getAddress());
         holder.lblDate.setText(showDate(company.getDate()));
 
-        RequestQueue mRequestQueue = App.getRequestQueue();
-        mImageLoader = new ImageLoader(mRequestQueue, new BitmapMemCache(MAX_MEMORY_CACHE_SIZE_KB));
-        mImageLoader.get(company.getUrl(),
-                ImageLoader.getImageListener(holder.imgCompany, R.mipmap.ic_launcher, R.mipmap.ic_launcher));
-        holder.imgCompany.setImageUrl(company.getUrl(), mImageLoader);
 
     }
 
 
-
     public class ViewHolder {
 
-        private final NetworkImageView imgCompany;
         private final TextView lblName;
         private final TextView lblEmail;
         private final TextView lblAddress;
         private final TextView lblDate;
 
         public ViewHolder(View itemView){
-            imgCompany = (NetworkImageView) itemView.findViewById(R.id.img_company);
             lblName = (TextView) itemView.findViewById(R.id.lbl_name);
             lblEmail = (TextView) itemView.findViewById(R.id.lbl_email);
             lblAddress = (TextView) itemView.findViewById(R.id.lbl_address);
@@ -109,5 +96,8 @@ public class CompaniesAdapter extends ArrayAdapter<Company> {
 
         return str.toString();
     }
+
+
+
 
 }
