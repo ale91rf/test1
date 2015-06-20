@@ -3,6 +3,7 @@ package com.omitsis.test;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -132,7 +133,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             }
         };
 
-        // Se crea la petición.
+        // Se crea la peticion.
         Gson gson = new Gson();
         Type tipo = new TypeToken<List<Company>>() {
         }.getType();
@@ -144,7 +145,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 gson);
 
         request.setTag(TAG);
-        // Se añade la petición a la cola de Volley.
+        // Se annade la peticion a la cola de Volley.
         mRequestQueue.add(request);
 
 
@@ -158,10 +159,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         if(companies != null){
             adapter = new CompaniesAdapter(getApplicationContext(), companies);
-            for(Company company: companies){
-                showToast(company.name.toString());
-            }
 
+            mListView.setAdapter(adapter);
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    showToast("pulsada la cia: " + companies.get(position).getName());
+                }
+            });
         }
 
 

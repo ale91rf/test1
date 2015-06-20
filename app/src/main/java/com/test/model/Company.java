@@ -6,7 +6,7 @@ package com.test.model;
 public class Company {
 
     public String name;
-    public String url;
+    public String imageUrl;
     public float longitude;
     public int id;
     public float latitude;
@@ -14,9 +14,9 @@ public class Company {
     public String date;
     public String email;
 
-    public Company(String name, String url, float longitude, int id, float latitude, String address, String date, String email) {
+    public Company(String name, String imageUrl, float longitude, int id, float latitude, String address, String date, String email) {
         this.name = name;
-        this.url = url;
+        this.imageUrl = imageUrl;
         this.longitude = longitude;
         this.id = id;
         this.latitude = latitude;
@@ -34,11 +34,11 @@ public class Company {
     }
 
     public String getUrl() {
-        return url;
+        return redirected(imageUrl);
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public float getLongitude() {
@@ -87,5 +87,19 @@ public class Company {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    //este metodo lo tengo que hacer ya que al meter la url dada en el json falla
+    //ya que es redireccionada a otra ruta
+    public String redirected(String oldUrl){
+        String newUrl = "";
+        switch (oldUrl){
+            case "http://placehold.it/150x200/271727/fff":
+                newUrl = "https://placeholdit.imgix.net/~text?txtsize=14&bg=271727&txtclr=ffffff&txt=150%C3%97200&w=150&h=200";
+                break;
+
+        }
+
+        return newUrl;
     }
 }

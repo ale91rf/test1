@@ -17,9 +17,9 @@ public class Internet {
     }
 
 
-    // Retorna si hay conexión a la red o no.
+    // Retorna si hay conexion a la red o no.
     public boolean isConnectionAvailable() {
-        // Se obtiene del gestor de conectividad la información de red.
+        // Se obtiene del gestor de conectividad la informacion de red.
         ConnectivityManager gestorConectividad = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo infoRed = gestorConectividad.getActiveNetworkInfo();
         // Se retorna si hay conexión.
