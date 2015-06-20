@@ -1,6 +1,7 @@
 package com.omitsis.test;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.test.model.Company;
 import com.test.utils.CompaniesAdapter;
+import com.test.utils.Constants;
 import com.test.utils.Internet;
 import com.test.volley.App;
 import com.test.volley.GsonArrayRequest;
@@ -31,13 +33,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     private RequestQueue mRequestQueue;
     private ListView mListView;
-    private static final String TAG = "requests";
-    private static final String URL = "http://www.json-generator.com/api/json/get/caZrciQZRu?indent=2";
-    private Internet connection;
+    private Internet mConnection;
     private ProgressBar mPgBar;
     private Button mBtnTry;
     private ArrayList<Company> companies;
-    private CompaniesAdapter adapter;
+    private CompaniesAdapter mAdapter;
+    private Bundle mBundle;
+    private Intent mIntent;
 
 
     @Override
@@ -46,10 +48,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
 
         mRequestQueue = App.getRequestQueue();
-        connection = new Internet(this);
+        mConnection = new Internet(this);
         getView();
 
-        if(connection != null & connection.isConnectionAvailable()){
+        if(mConnection != null & mConnection.isConnectionAvailable()){
             sendRequest();
         }else{
             showToast(getString(R.string.cannot));
@@ -77,7 +79,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         super.onStop();
         if (mRequestQueue != null){
             //cancelamos peticiones pendientes si las hubiera
-            mRequestQueue.cancelAll(TAG);
+            mRequestQueue.cancelAll(Constants.TAG);
         }
     }
 
@@ -103,7 +105,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         mPgBar.setVisibility(View.VISIBLE);
 
 
-        if(connection != null & connection.isConnectionAvailable()){
+        if(mConnection != null & mConnection.isConnectionAvailable()){
             sendRequest();
         }else{
             showToast(getString(R.string.cannot));
@@ -142,10 +144,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
 
         GsonArrayRequest<ArrayList<Company>> request = new GsonArrayRequest<ArrayList<Company>>(
-                Request.Method.GET, URL, tipo, listener, errorListener,
+                Request.Method.GET, Constants.URL, tipo, listener, errorListener,
                 gson);
 
-        request.setTag(TAG);
+        request.setTag(Constants.TAG);
         // Se annade la peticion a la cola de Volley.
         mRequestQueue.add(request);
 
@@ -159,13 +161,27 @@ public class MainActivity extends Activity implements View.OnClickListener{
         companies = response;
 
         if(companies != null){
-            adapter = new CompaniesAdapter(getApplicationContext(), companies);
+            mAdapter = new CompaniesAdapter(getApplicationContext(), companies);
 
-            mListView.setAdapter(adapter);
+            mListView.setAdapter(mAdapter);
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    showToast("pulsada la cia: " + companies.get(position).getName());
+
+                    mBundle = new Bundle();
+                    mBundle.putString(Constants.TAG_NAME, companies.get(position).getName());
+                    mBundle.putString(Constants.TAG_IMG_URL, companies.get(position).getUrl());
+                    mBundle.putFloat(Constants.TAG_LONGITUDE, companies.get(position).getLongitude());
+                    mBundle.putInt(Constants.TAG_ID, companies.get(position).getId());
+                    mBundle.putFloat(Constants.TAG_LATITUDE, companies.get(position).getLatitude());
+                    mBundle.putString(Constants.TAG_ADDRESS, companies.get(position).getAddress());
+                    mBundle.putString(Constants.TAG_DATE, companies.get(position).getDate());
+                    mBundle.putString(Constants.TAG_EMAIL, companies.get(position).getEmail());
+
+                    mIntent = new Intent(getApplicationContext(), DetailActivity.class);
+                    mIntent.putExtras(mBundle);
+                    startActivity(mIntent);
+
                 }
             });
         }

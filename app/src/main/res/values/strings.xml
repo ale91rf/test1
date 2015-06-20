@@ -4,4 +4,11 @@
     <string name="volver_a_intentar">Volver a intentar</string>
     <string name="cannot">No se ha podido establecer la conexion con internet</string>
     <string name="error_download">Ha habido un error mientras se cargaban las companias</string>
+    <string name="title_activity_detail">DetailActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="id_company">id:</string>
+    <string name="address_">Address:</string>
+    <string name="date_">Date:</string>
 </resources>

@@ -18,7 +18,8 @@ public class Company {
     public String email;
 
 
-    public Company(String name, String imageUrl, float longitude, int id, float latitude, String address, String date, String email) {
+    public Company(String name, String imageUrl, float longitude, int id, float latitude,
+                   String address, String date, String email) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.longitude = longitude;

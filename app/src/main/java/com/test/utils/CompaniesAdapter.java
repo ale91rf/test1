@@ -21,7 +21,7 @@ import java.util.Date;
  */
 public class CompaniesAdapter extends ArrayAdapter<Company> {
 
-    public static final int MAX_MEMORY_CACHE_SIZE_KB = 25 * 1024;
+
 
 
     private final SimpleDateFormat formatter;
