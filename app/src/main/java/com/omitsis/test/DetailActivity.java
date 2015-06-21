@@ -1,12 +1,14 @@
 package com.omitsis.test;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,13 +24,15 @@ import com.test.volley.BitmapMemCache;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DetailActivity extends Activity {
+public class DetailActivity extends Activity implements View.OnClickListener{
 
     private Bundle mBundle;
     private Company company;
@@ -41,6 +45,8 @@ public class DetailActivity extends Activity {
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
     private Internet mConnection;
+    private Button btnMap;
+    private Intent mIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +94,9 @@ public class DetailActivity extends Activity {
         lblDate = (TextView) findViewById(R.id.lbl_date);
         lblDate.setText(showDate(company.getDate()));
 
+        btnMap = (Button) findViewById(R.id.btn_map);
+        btnMap.setOnClickListener(this);
+
 
     }
 
@@ -114,6 +123,37 @@ public class DetailActivity extends Activity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_map:
+                showMap();
+                break;
+        }
+    }
+
+    private void showMap() {
+
+        if(company != null){
+
+            mIntent = new Intent(Intent.ACTION_VIEW);
+
+
+            //le pasamos la longitud y latitud que venia con el json
+            mIntent.setData(Uri.parse("geo:"+String.valueOf(company.getLatitude())+","+String.valueOf(company.getLongitude())));
+
+            if (mIntent.resolveActivity(getPackageManager()) != null){
+                startActivity(mIntent);
+            }
+
+
+
+        }
+
+
+
     }
 
 
