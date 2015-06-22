@@ -11,4 +11,12 @@
     <string name="address_">Address:</string>
     <string name="date_">Date:</string>
     <string name="see_on_map">see on map</string>
+    <string name="save">save</string>
+    <string name="title_activity_email">Send E-mail</string>
+
+    <string name="to_">To:</string>
+    <string name="subject_">Subject</string>
+    <string name="body_">Body</string>
+    <string name="send_email">Send E-mail</string>
+    <string name="you_need">you need to write the message body</string>
 </resources>

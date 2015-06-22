@@ -47,6 +47,7 @@ public class DetailActivity extends Activity implements View.OnClickListener{
     private Internet mConnection;
     private Button btnMap;
     private Intent mIntent;
+    private Button btnEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,9 @@ public class DetailActivity extends Activity implements View.OnClickListener{
         btnMap = (Button) findViewById(R.id.btn_map);
         btnMap.setOnClickListener(this);
 
+        btnEmail = (Button) findViewById(R.id.btn_email);
+        btnEmail.setOnClickListener(this);
+
 
     }
 
@@ -131,7 +135,19 @@ public class DetailActivity extends Activity implements View.OnClickListener{
             case R.id.btn_map:
                 showMap();
                 break;
+            case R.id.btn_email:
+                openEmail();
+                break;
         }
+    }
+
+    private void openEmail() {
+        mIntent = new Intent(getApplicationContext(), EmailActivity.class);
+        mBundle = new Bundle();
+        mBundle.putString(Constants.TAG_EMAIL, company.getEmail());
+        mIntent.putExtras(mBundle);
+        startActivity(mIntent);
+
     }
 
     private void showMap() {
