@@ -17,6 +17,10 @@ public class Company {
     public String date;
     public String email;
 
+    public boolean fav;
+
+
+    public Company(){};
 
     public Company(String name, String imageUrl, float longitude, int id, float latitude,
                    String address, String date, String email) {
@@ -28,6 +32,8 @@ public class Company {
         this.address = address;
         this.date = date;
         this.email = email;
+
+        this.fav = false;
 
     }
 
@@ -93,6 +99,15 @@ public class Company {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    public boolean getFav() {
+        return fav;
+    }
+
+    public void setFav(boolean fav) {
+        this.fav = fav;
     }
 
 

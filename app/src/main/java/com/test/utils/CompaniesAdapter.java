@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -63,18 +64,26 @@ public class CompaniesAdapter extends ArrayAdapter<Company> {
         holder.lblAddress.setText(company.getAddress());
         holder.lblDate.setText(showDate(company.getDate()));
 
+        if(company.getFav()){
+            holder.imgFav.setVisibility(View.VISIBLE);
+        }else{
+            holder.imgFav.setVisibility(View.INVISIBLE);
+        }
+
 
     }
 
 
     public class ViewHolder {
 
+        private final ImageView imgFav;
         private final TextView lblName;
         private final TextView lblEmail;
         private final TextView lblAddress;
         private final TextView lblDate;
 
         public ViewHolder(View itemView){
+            imgFav = (ImageView) itemView.findViewById(R.id.img_fav);
             lblName = (TextView) itemView.findViewById(R.id.lbl_name);
             lblEmail = (TextView) itemView.findViewById(R.id.lbl_email);
             lblAddress = (TextView) itemView.findViewById(R.id.lbl_address);

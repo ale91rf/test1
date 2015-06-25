@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.test.bd.DAO;
 import com.test.model.Company;
 import com.test.utils.Constants;
 import com.test.utils.Internet;
@@ -48,6 +49,9 @@ public class DetailActivity extends Activity implements View.OnClickListener{
     private Button btnMap;
     private Intent mIntent;
     private Button btnEmail;
+    private MenuItem item;
+    private Button btnAddFav;
+    private DAO mDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,8 @@ public class DetailActivity extends Activity implements View.OnClickListener{
                     mBundle.getFloat(Constants.TAG_LONGITUDE), mBundle.getInt(Constants.TAG_ID),
                     mBundle.getFloat(Constants.TAG_LATITUDE), mBundle.getString(Constants.TAG_ADDRESS),
                     mBundle.getString(Constants.TAG_DATE), mBundle.getString(Constants.TAG_EMAIL));
+
+            company.setFav(mBundle.getBoolean(Constants.TAG_FAV));
         }
 
 
@@ -101,6 +107,12 @@ public class DetailActivity extends Activity implements View.OnClickListener{
         btnEmail = (Button) findViewById(R.id.btn_email);
         btnEmail.setOnClickListener(this);
 
+        btnAddFav = (Button) findViewById(R.id.btn_save_fav);
+        if(company.getFav()){
+            btnAddFav.setText(R.string.delete_fav);
+        }
+        btnAddFav.setOnClickListener(this);
+
 
     }
 
@@ -117,6 +129,7 @@ public class DetailActivity extends Activity implements View.OnClickListener{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detail, menu);
+
         return true;
     }
 
@@ -138,7 +151,44 @@ public class DetailActivity extends Activity implements View.OnClickListener{
             case R.id.btn_email:
                 openEmail();
                 break;
+            case R.id.btn_save_fav:
+                if(btnAddFav.getText().toString().equals(getResources().getString(R.string.add_fav))){
+                    addFav();
+                }else{
+                    deleteFav();
+                }
+
+                break;
         }
+    }
+
+    private void deleteFav() {
+        if(mDao == null){
+            mDao = new DAO(getApplicationContext());
+        }
+
+        mDao.open();
+        mDao.deleteCompany(company.getId());
+        showToast(getString(R.string.delete_success));
+        mDao.close();
+
+        btnAddFav.setText(getResources().getString(R.string.add_fav));
+
+    }
+
+    private void addFav() {
+        if(mDao == null){
+            mDao = new DAO(getApplicationContext());
+        }
+
+        mDao.open();
+        mDao.insertCompany(company);
+
+        showToast(getString(R.string.added_success));
+
+        mDao.close();
+
+        btnAddFav.setText(getResources().getString(R.string.delete_fav));
     }
 
     private void openEmail() {
@@ -221,4 +271,9 @@ public class DetailActivity extends Activity implements View.OnClickListener{
 
         return str.toString();
     }
+
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
 }

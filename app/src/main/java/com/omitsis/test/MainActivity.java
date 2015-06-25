@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.test.bd.DAO;
 import com.test.model.Company;
 import com.test.utils.CompaniesAdapter;
 import com.test.utils.Constants;
@@ -40,12 +41,22 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private CompaniesAdapter mAdapter;
     private Bundle mBundle;
     private Intent mIntent;
+    private DAO mDao;
+    private ArrayList<Company> companiesBD;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         mRequestQueue = App.getRequestQueue();
         mConnection = new Internet(this);
@@ -60,9 +71,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             mBtnTry.setOnClickListener(this);
 
         }
-
     }
-
 
     private void getView() {
         mListView = (ListView) findViewById(R.id.company_list);
@@ -133,6 +142,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 showToast(getString(R.string.error_download));
                 mPgBar.setVisibility(View.INVISIBLE);
                 mBtnTry.setVisibility(View.VISIBLE);
+                mBtnTry.setOnClickListener(MainActivity.this);
             }
         };
 
@@ -161,6 +171,24 @@ public class MainActivity extends Activity implements View.OnClickListener{
         companies = response;
 
         if(companies != null){
+
+            mDao = new DAO(getApplicationContext()).open();
+            companiesBD = mDao.getAllCompanies();
+            mDao.close();
+
+            //si hay companias guardadas en favoritas, ponemos a true el campo fav de tal compania del
+            //ArrayList de companias descargadas
+            if (companiesBD != null)    {
+                for (Company companyBD: companiesBD){
+                    for (Company company: companies){
+                        if(company.getId() == companyBD.getId()){
+                            company.setFav(true);
+                        }
+                    }
+                }
+            }
+
+
             mAdapter = new CompaniesAdapter(getApplicationContext(), companies);
 
             mListView.setAdapter(mAdapter);
@@ -177,6 +205,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     mBundle.putString(Constants.TAG_ADDRESS, companies.get(position).getAddress());
                     mBundle.putString(Constants.TAG_DATE, companies.get(position).getDate());
                     mBundle.putString(Constants.TAG_EMAIL, companies.get(position).getEmail());
+                    mBundle.putBoolean(Constants.TAG_FAV, companies.get(position).getFav());
 
                     mIntent = new Intent(getApplicationContext(), DetailActivity.class);
                     mIntent.putExtras(mBundle);

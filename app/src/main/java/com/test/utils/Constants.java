@@ -16,7 +16,7 @@ public class Constants {
     public static final String TAG_ADDRESS = "adrress";
     public static final String TAG_DATE = "date";
     public static final String TAG_EMAIL = "email";
-
+    public static final String TAG_FAV = "fav";
 
 
 
