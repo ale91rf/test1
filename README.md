@@ -1,28 +1,23 @@
-Omitsis Android 
+Android App// networking-SQLite
 ===============
 
-Hello World!
 
 
-In order to complete this test you have to follow these steps:
 
-1) Fork this repository
+1) Networking con Volley
 -----------------------
-Fork this repository to your computer or just download the source.
+Descargamos un archivo json por http mediante la libreria Volley.
 
-2) List companies
+2) Listar las compañias
 -----------------
-Create a list of the companies.
-We have published a json where you can retrieve all the information of the companies for you:
-http://www.json-generator.com/api/json/get/caZrciQZRu?indent=2
+Creo un listView con todas las compañias llegadas en el archivo.
 
-3) Detail
+3) Detalle
 ---------
-Make a view with the detail information of the company when the user taps on one element of the list. Feel free to add your own features.
+Posiblidad de ver en detalle una empresa. Para ello creamos otra actividad en la cual mostramos más información y dando la posiblidad de lanzar google maps o mandar un correo mediante un intent.
 
-6) Finish
+4) BBDD
 --------
-Send us your public repository link to check the solution, or just email us with your source code: mobile[at]omitsis[dot]com.
+Guardamos en una base de datos SQLite las empresa que queramos añadir a favoritos. Creación de Helper y DAO para mejor interacción con la base de datos.
 
 
-Good luck!
