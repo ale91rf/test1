@@ -11,7 +11,7 @@ public class Helper extends SQLiteOpenHelper{
 
     public Helper(Context context) {
         // Se llama al constructor del padre, que es quien realmente crea o
-        // actualiza la versión de BD si es necesario.
+        // actualiza la version de BD si es necesario.
         super(context, test1BD.BD_NOMBRE, null, test1BD.BD_VERSION);
     }
 

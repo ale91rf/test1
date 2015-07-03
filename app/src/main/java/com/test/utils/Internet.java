@@ -22,7 +22,7 @@ public class Internet {
         // Se obtiene del gestor de conectividad la informacion de red.
         ConnectivityManager gestorConectividad = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo infoRed = gestorConectividad.getActiveNetworkInfo();
-        // Se retorna si hay conexión.
+        // Se retorna si hay conexion.
         return (infoRed != null && infoRed.isConnected());
     }
 

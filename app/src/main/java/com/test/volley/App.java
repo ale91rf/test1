@@ -10,7 +10,7 @@ import com.android.volley.toolbox.Volley;
  */
 
 //Al extender la clase Application la clase RequestQueue sera instanciada automaticamente y una unica vez
-    //utilizando asi el patron de diseño SINGLETON
+    //utilizando asi el patron de disenno SINGLETON
 public class App extends Application {
 
     private static RequestQueue mRequestQueue;

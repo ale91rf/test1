@@ -1,8 +1,7 @@
-package com.omitsis.test;
+package com.test.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.test.R;
 import com.test.bd.DAO;
 import com.test.model.Company;
 import com.test.utils.CompaniesAdapter;

@@ -1,4 +1,4 @@
-package com.omitsis.test;
+package com.test.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.test.R;
 import com.test.bd.DAO;
 import com.test.model.Company;
 import com.test.utils.Constants;
@@ -25,8 +26,6 @@ import com.test.volley.BitmapMemCache;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;

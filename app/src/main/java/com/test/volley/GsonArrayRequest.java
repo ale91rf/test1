@@ -43,7 +43,7 @@ public class GsonArrayRequest<T> extends Request<T> {
         }
     }
 
-    // Envía la respuesta al listener
+    // Envia la respuesta al listener
     @Override
     protected void deliverResponse(T response) {
         // Se llama al metodo onResponse del listener pasandole la respuesta.

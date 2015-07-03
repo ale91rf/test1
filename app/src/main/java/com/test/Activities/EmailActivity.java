@@ -1,4 +1,4 @@
-package com.omitsis.test;
+package com.test.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.test.R;
 import com.test.utils.Constants;
 
 public class EmailActivity extends Activity implements View.OnClickListener{

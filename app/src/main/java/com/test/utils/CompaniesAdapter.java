@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.omitsis.test.R;
+import com.test.R;
 import com.test.model.Company;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

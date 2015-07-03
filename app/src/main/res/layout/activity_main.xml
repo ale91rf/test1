@@ -6,7 +6,7 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:background="@android:drawable/divider_horizontal_dim_dark"
-    tools:context=".MainActivity">
+    tools:context="com.test.Activities.MainActivity">
 
     <ListView
         android:id="@+id/company_list"
